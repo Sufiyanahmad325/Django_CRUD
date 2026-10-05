@@ -50,3 +50,5 @@ def login_view(request):
     return render(request, 'blog/login.html')
 
 
+def home_view(request):
+    return render(request, 'blog/home.html')
