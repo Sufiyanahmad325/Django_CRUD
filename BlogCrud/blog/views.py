@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from .models import Blog
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -64,3 +65,22 @@ def home_view(request):
         "blog/home.html",
         {"blogs": blogs}
     )
+
+
+
+@login_required
+def create_blog_view(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        content = request.POST.get("content")
+
+        Blog.objects.create(
+            title=title,
+            content=content,
+            author=request.user
+        )
+
+        return redirect("home")
+    return render(request, "blog/create_blog.html")
+
+
