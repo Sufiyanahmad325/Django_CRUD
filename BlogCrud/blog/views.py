@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from .models import Blog
 
 # Create your views here.
 
@@ -50,5 +51,16 @@ def login_view(request):
     return render(request, 'blog/login.html')
 
 
+
+
+
+
+
 def home_view(request):
-    return render(request, 'blog/home.html')
+    blogs = Blog.objects.filter(author=request.user)
+
+    return render(
+        request,
+        "blog/home.html",
+        {"blogs": blogs}
+    )
