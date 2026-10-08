@@ -84,3 +84,23 @@ def create_blog_view(request):
     return render(request, "blog/create_blog.html")
 
 
+
+@login_required 
+def edit_blog_view(request , blog_id):
+    blog = Blog.objects.get(id=blog_id) #what is happening here => ans = > here we are getting the blog object from the database using the id passed in the url and storing it in the variable blog
+
+    #check: blog author is the same as the logged in user
+    if blog.author != request.user:
+        return redirect("home")
+    
+    if request.method == "POST":
+        title = request.POST.get("title")
+        content = request.POST.get("content")
+
+        blog.title = title
+        blog.content = content
+        blog.save()
+
+        return redirect("home")
+    
+    return render(request, "blog/edit_blog.html", {"blog": blog})
