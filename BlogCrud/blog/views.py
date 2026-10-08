@@ -104,3 +104,15 @@ def edit_blog_view(request , blog_id):
         return redirect("home")
     
     return render(request, "blog/edit_blog.html", {"blog": blog})
+
+
+
+@login_required
+def delete_blog_view(request , blog_id):
+    blog = Blog.objects.get(id=blog_id)
+
+    if blog.author != request.user:
+        return redirect("home")
+
+    blog.delete()
+    return redirect("home")
