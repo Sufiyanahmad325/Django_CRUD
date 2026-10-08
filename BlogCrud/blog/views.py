@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from .models import Blog
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -116,3 +117,11 @@ def delete_blog_view(request , blog_id):
 
     blog.delete()
     return redirect("home")
+
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect("login")
+    

@@ -14,15 +14,18 @@
       <button>Create Blog</button>
     </a>
 
-    {% comment %} blogs {% endcomment %}
+
+    {% comment %} Display all blogs {% endcomment %}
     {% for blog in blogs%}
       <h3>{{ blog.title }}</h3>
       <p>{{ blog.content }}</p>
-
+      
       <a href="{% url 'edit_blog' blog.id %}">
       <button>Edit</button>
       </a>
-
+      <a href="{% url 'delete_blog' blog.id %}">
+      <button>Delete</button>
+      </a>
     {% endfor %}
   </body>
 </html>
