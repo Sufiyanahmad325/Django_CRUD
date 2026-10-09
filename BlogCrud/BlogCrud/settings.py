@@ -36,8 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     "blog",
+    "tailwind",
+    "theme",
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,6 @@ MAILERS = {
 
 
 LOGIN_URL = "/login/"
+
+
+TAILWIND_APP_NAME = "theme"
